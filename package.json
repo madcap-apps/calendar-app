@@ -7,6 +7,7 @@
     "test:ci": "TEST_BROWSER_DRIVER=puppeteer meteor test --driver-package=ardatan:mocha --raw-logs --once"
   },
   "dependencies": {
+    "@angular/animations": "^8.1.0",
     "@angular/common": "7.1.1",
     "@angular/compiler": "7.1.1",
     "@angular/core": "7.1.1",
@@ -15,7 +16,9 @@
     "@angular/platform-browser-dynamic": "7.1.1",
     "@angular/router": "7.1.1",
     "@babel/runtime": "7.1.5",
+    "angular-calendar": "^0.27.12",
     "core-js": "2.5.7",
+    "date-fns": "^1.30.1",
     "meteor-node-stubs": "0.4.1",
     "meteor-rxjs": "0.4.14",
     "rxjs": "6.3.3",

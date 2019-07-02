@@ -8,6 +8,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class CalendarPageComponent implements OnInit {
 
+  date = new Date();
+
   constructor() { }
 
   ngOnInit() {
