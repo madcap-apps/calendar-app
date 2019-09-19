@@ -1,6 +1,13 @@
 mc-login-page {
   .mc-login-page-body {
-    display: flex;
-    flex-direction: column;
+    .mc-login-page-title {
+      text-align: center;
+    }
+
+    .mc-login-page-credentials {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

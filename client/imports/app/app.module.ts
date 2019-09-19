@@ -48,7 +48,7 @@ import { CalendarPageComponent } from 'client/imports/app/components/calendar-pa
       // Home Page
       {
         path: '',
-        redirectTo: '/todoList',
+        redirectTo: '/login',
         pathMatch: 'full'
       },
       // 404 Page
