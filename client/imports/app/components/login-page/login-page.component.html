@@ -1,11 +1,41 @@
 <div class="mc-login-page-body">
-  <div class="row">
-    <div class="col s10 m4">
-      <h3 class="mc-login-page-title">MadGathering</h3>
-      <div class="mc-login-page-credentials card">
+  <h3 class="mc-login-page-title">MadGathering</h3>
+  <div class="mc-login-page-credentials card">
+    <ng-container [ngSwitch]="currentNavigation">
+      <form *ngSwitchCase="Navigation.Login" [formGroup]="loginFormGroup">
         <input placeholder="Username" />
         <input placeholder="Password" type="password" />
-      </div>
-    </div>
+        <div class="mc-login-page-buttons">
+          <button class="btn waves-effect waves-light" (click)="onLogin()">
+            Login
+          </button>
+          <button class="btn waves-effect waves-light" (click)="onNavigateToRegistration()">
+            Sign Up
+          </button>
+        </div>
+        <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToForgot()">Forgot your password?</a>
+      </form>
+      <form *ngSwitchCase="Navigation.Register" [formGroup]="signupFormGroup">
+        <input placeholder="Name" />
+        <input placeholder="Email" />
+        <input placeholder="Username" />
+        <input placeholder="Password" type="password" />
+        <div class="mc-login-page-register-container">
+          <button class="btn waves-effect waves-light" (click)="onLogin()">
+            Register
+          </button>
+        </div>
+        <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToLogin()">Already registered? Login</a>
+      </form>
+      <form *ngSwitchCase="Navigation.Forgot" [formGroup]="forgotFormGroup">
+        <input placeholder="Email" />
+        <div class="mc-login-page-register-container">
+          <button class="btn waves-effect waves-light" (click)="onResetPassword()">
+            Reset My Password
+          </button>
+        </div>
+        <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToLogin()">Remembered password? Login</a>
+      </form>
+    </ng-container>
   </div>
 </div>

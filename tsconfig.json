@@ -22,7 +22,12 @@
       "@types/mocha",
       "@types/chai",
       "@types/sinon"
-    ]
+    ],
+    "paths": {
+      "@models/*": ["imports/models/*"],
+      "@collections/*": ["imports/collections/*"],
+      "@components/*": ["client/imports/app/components/*"]
+    }
   },
   "include": [
     "imports/**/*.ts",
