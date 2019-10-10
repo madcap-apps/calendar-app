@@ -3,8 +3,8 @@
   <div class="mc-login-page-credentials card">
     <ng-container [ngSwitch]="currentNavigation">
       <form *ngSwitchCase="Navigation.Login" [formGroup]="loginFormGroup">
-        <input placeholder="Username" />
-        <input placeholder="Password" type="password" />
+        <input formControlName="username" placeholder="Username" />
+        <input formControlName="password" placeholder="Password" type="password" />
         <div class="mc-login-page-buttons">
           <button class="btn waves-effect waves-light" (click)="onLogin()">
             Login
@@ -16,19 +16,19 @@
         <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToForgot()">Forgot your password?</a>
       </form>
       <form *ngSwitchCase="Navigation.Register" [formGroup]="signupFormGroup">
-        <input placeholder="Name" />
-        <input placeholder="Email" />
-        <input placeholder="Username" />
-        <input placeholder="Password" type="password" />
+        <input formControlName="name" placeholder="Name" />
+        <input formControlName="email" placeholder="Email" />
+        <input formControlName="username" placeholder="Username" />
+        <input formControlName="password" placeholder="Password" type="password" />
         <div class="mc-login-page-register-container">
-          <button class="btn waves-effect waves-light" (click)="onLogin()">
+          <button class="btn waves-effect waves-light" (click)="onRegister()">
             Register
           </button>
         </div>
         <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToLogin()">Already registered? Login</a>
       </form>
       <form *ngSwitchCase="Navigation.Forgot" [formGroup]="forgotFormGroup">
-        <input placeholder="Email" />
+        <input formControlName="email" placeholder="Email" />
         <div class="mc-login-page-register-container">
           <button class="btn waves-effect waves-light" (click)="onResetPassword()">
             Reset My Password
@@ -39,3 +39,17 @@
     </ng-container>
   </div>
 </div>
+<!-- <div class="progress">
+  <div class="indeterminate"></div>
+</div>
+<div class="preloader-wrapper big active">
+  <div class="spinner-layer spinner-blue-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div> -->

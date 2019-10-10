@@ -10,7 +10,7 @@ Meteor.startup(() => {
   if (Meteor.isProduction) {
     enableProdMode();
   }
-
+  
   platformBrowserDynamic().bootstrapModule(AppModule);
 
 });

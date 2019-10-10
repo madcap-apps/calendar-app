@@ -26,14 +26,15 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     this.loginFormGroup = this.formBuilder.group({
-      username: [{}, Validators.required],
-      password: [{}, Validators.required]
+      username: [null, Validators.required],
+      password: [null, Validators.required]
     });
 
     MeteorObservable.subscribe('accountList').subscribe(() => {
-      const accounts = Accounts.find();
+      const accountObservable = Accounts.find();
+      const accounts = accountObservable.fetch();
       console.log(`accounts: ${JSON.stringify(accounts)}`);
-    })
+    });
   }
 
   onLogin() {
@@ -43,10 +44,10 @@ export class LoginPageComponent implements OnInit {
   onNavigateToRegistration() {
     console.log(`redirect to registration`);
     this.signupFormGroup = this.formBuilder.group({
-      name: [{}, Validators.required],
-      email: [{}, Validators.required],
-      username: [{}, Validators.required],
-      password: [{}, Validators.required]
+      name: [null, Validators.required],
+      email: [null, Validators.required],
+      username: [null, Validators.required],
+      password: [null, Validators.required]
     });
     this.currentNavigation = Navigation.Register;
   }
@@ -59,16 +60,24 @@ export class LoginPageComponent implements OnInit {
   onNavigateToForgot() {
     console.log(`redirect to forgot password`);
     this.forgotFormGroup = this.formBuilder.group({
-      email: [{}, Validators.required]
+      email: [null, Validators.required]
     });
     this.currentNavigation = Navigation.Forgot;
   }
 
-  onForgotPassword() {
-    console.log(`forgot password`);
+  onResetPassword() {
+    console.log(`reset password`);
   }
 
-  onResetPassword() {
+  onRegister(){
+    console.log(`name: ${this.signupFormGroup.value.name} - email: ${this.signupFormGroup.value.email} - username: ${this.signupFormGroup.value.username} - password: ${this.signupFormGroup.value.password}`);
+
+    Meteor.call('sendEmail', 
+      this.signupFormGroup.value.email,
+      "madcap.software.community.service@gmail.com",
+      "Example Email",
+      "The contents of our email in plain text.",
+    );
 
   }
 }
