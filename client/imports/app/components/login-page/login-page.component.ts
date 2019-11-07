@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MeteorObservable } from 'meteor-rxjs';
-import { Accounts } from '@collections/accounts';
+import { Register } from '@models/register.model';
+import { AccountProfile } from '@models/account-profile.model';
 
 enum Navigation {
   Login,
@@ -30,15 +31,25 @@ export class LoginPageComponent implements OnInit {
       password: [null, Validators.required]
     });
 
-    MeteorObservable.subscribe('accountList').subscribe(() => {
-      const accountObservable = Accounts.find();
-      const accounts = accountObservable.fetch();
-      console.log(`accounts: ${JSON.stringify(accounts)}`);
+    MeteorObservable.subscribe('userList').subscribe(() => {
+      const uesrsObs = Meteor.users.find();
+      const users = uesrsObs.fetch();
+      console.log(`users: ${JSON.stringify(users)}`);
     });
   }
 
   onLogin() {
     console.log(`logging in - username: ${this.loginFormGroup.value.username}`);
+    Meteor.loginWithPassword(
+      this.loginFormGroup.value.username,
+      this.loginFormGroup.value.password,
+      err => {
+        if (!err) {
+          console.log(`error logging in: ${err}`);
+        } else {
+          console.log(`logged in`);
+        }
+      });
   }
 
   onNavigateToRegistration() {
@@ -69,15 +80,29 @@ export class LoginPageComponent implements OnInit {
     console.log(`reset password`);
   }
 
-  onRegister(){
-    console.log(`name: ${this.signupFormGroup.value.name} - email: ${this.signupFormGroup.value.email} - username: ${this.signupFormGroup.value.username} - password: ${this.signupFormGroup.value.password}`);
+  onRegister() {
 
-    Meteor.call('sendEmail', 
-      this.signupFormGroup.value.email,
-      "madcap.software.community.service@gmail.com",
-      "Example Email",
-      "The contents of our email in plain text.",
-    );
+    console.log(`name: ${this.signupFormGroup.value.name} -
+     email: ${this.signupFormGroup.value.email} - 
+     username: ${this.signupFormGroup.value.username} - 
+     password: ${this.signupFormGroup.value.password}`);
 
+    var profile = <AccountProfile>{
+      Name: this.signupFormGroup.value.name
+    };
+
+    var register = <Register>{
+      Name: this.signupFormGroup.value.name,
+      Email: this.signupFormGroup.value.email,
+      Username: this.signupFormGroup.value.username,
+      Password: this.signupFormGroup.value.password,
+      Profile: profile
+    };
+
+    Meteor.call('registerAccount', register, err => {
+      if (!err) {
+        console.log(`error registering account: ${err}`);
+      }
+    });
   }
 }

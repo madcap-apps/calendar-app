@@ -45,18 +45,16 @@ import { CalendarPageComponent } from 'client/imports/app/components/calendar-pa
         path: 'calendar',
         component: CalendarPageComponent
       },
-      // Home Page
       {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
       },
-      // 404 Page
       {
         path: '**',
         component: PageNotFoundComponent
       }
-    ])
+    ], { useHash: true })
   ],
   declarations: [
     AppComponent,
