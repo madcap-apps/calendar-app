@@ -28,13 +28,23 @@
         <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToLogin()">Already registered? Login</a>
       </form>
       <form *ngSwitchCase="Navigation.Forgot" [formGroup]="forgotFormGroup">
+        <input formControlName="username" placeholder="Username" />
         <input formControlName="email" placeholder="Email" />
         <div class="mc-login-page-register-container">
-          <button class="btn waves-effect waves-light" (click)="onResetPassword()">
+          <button class="btn waves-effect waves-light" (click)="onSendResetPasswordLink()">
             Reset My Password
           </button>
         </div>
         <a class="waves-effect waves-teal btn-flat" (click)="onNavigateToLogin()">Remembered password? Login</a>
+      </form>
+      <form *ngSwitchCase="Navigation.Reset" [formGroup]="resetFormGroup">
+        <input formControlName="password1" placeholder="Password" type="password" />
+        <input formControlName="password2" placeholder="Password" type="password" />
+        <div class="mc-login-page-register-container">
+          <button class="btn waves-effect waves-light" (click)="onResetPassword()">
+            Change My Password
+          </button>
+        </div>
       </form>
     </ng-container>
   </div>

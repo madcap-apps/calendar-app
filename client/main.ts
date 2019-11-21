@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './imports/app/app.module';
+import { resetToken } from './imports/app/environment';
 
 Accounts.onEmailVerificationLink((token, done) => {
   Accounts.verifyEmail(token, err => {
@@ -12,6 +13,11 @@ Accounts.onEmailVerificationLink((token, done) => {
     }
     done();
   });
+});
+
+Accounts.onResetPasswordLink((token, done) => {
+  resetToken.Token = token;
+  done();
 });
 
 Meteor.startup(() => {
